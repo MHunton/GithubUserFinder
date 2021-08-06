@@ -6,6 +6,17 @@ class UI {
     
     // Display profile in UI
     showProfile(user) {
+        let date = new Date(user.created_at);
+        let year = date.getFullYear();
+        let month = date.getMonth()+1;
+        let dt = date.getDate();
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+        let newDate = `${dt}/${month}/${year}`
         this.profile.innerHTML = `
          <div class="card card-body mb-3">
             <div class="row">
@@ -16,14 +27,14 @@ class UI {
                 <div class="col-md-9 ">
                     <span class="badge bg-primary">Public Repos: ${user.public_repos}</span>
                     <span class="badge bg-secondary">Public Gists: ${user.public_gists}</span>
-                    <span class="badge bg-success">Followers: ${user.follwers}</span>
+                    <span class="badge bg-success">Followers: ${user.followers}</span>
                     <span class="badge bg-info">Following: ${user.following}</span>
                     <br><br>
                     <ul class="list-group">
                         <li class="list-group-item">Company: ${user.company}</li>
                         <li class="list-group-item">Website/Blog: ${user.blog}</li>
                         <li class="list-group-item">Location: ${user.location}</li>
-                        <li class="list-group-item">Member Since: ${user.created_at}</li>
+                        <li class="list-group-item">Member Since: ${newDate}</li>
                     </ul>
                 </div>
             </div>
@@ -31,6 +42,7 @@ class UI {
          <h3 class="page-heading mb-3">Latest Repos</h3>
          <div id="repos"></div>
         `;
+        console.log(user.created_at);
     }
 
     // Show user repos
